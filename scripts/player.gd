@@ -5,6 +5,7 @@ extends CharacterBody2D
 var target : Vector2
 var map : TileMapLayer
 var space_state : Object
+var moving : bool = false
 
 var astar_grid : AStarGrid2D = AStarGrid2D.new()
 var path_array : Array[Vector2] = []
@@ -31,6 +32,13 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
+		
+		moving = true
+		
+		# If click outside map or null tile, return
+		if (!map.get_cell_tile_data(map.local_to_map(get_global_mouse_position()))):
+			return
+		
 		target = get_global_mouse_position()
 		
 		# If collision between player and target, initialize A*		
@@ -60,10 +68,16 @@ func _physics_process(delta):
 		else:
 			path_global.clear()
 	# If no collision, move in a straight line towards target
-	else:
+	elif moving:
 		velocity = global_position.direction_to(target) * speed
 		if (global_position.distance_to(target) > 1):
 			move_and_slide()
+		else:
+			moving = false
+			
+	var input_direction = Input.get_vector("LEFT", "RIGHT", "UP", "DOWN")
+	velocity = input_direction * speed
+	move_and_slide()
 				
 				
 # Uses Raycast to check if collision occurs between global_position and end_position
