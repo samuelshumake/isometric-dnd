@@ -11,6 +11,7 @@
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_2u4b4")
+use_raycast = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(2.38419e-07, 9.53674e-07)
