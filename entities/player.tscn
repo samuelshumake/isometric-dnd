@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="3_x724b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sbhju"]
-size = Vector2(4, 4)
+size = Vector2(1, 1)
 
 [node name="Player" type="Node2D"]
 
